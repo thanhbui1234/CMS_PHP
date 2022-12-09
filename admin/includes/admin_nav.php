@@ -29,6 +29,6 @@
          </li>
      </ul>
      <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-     <?php include '/xampp  /htdocs/PHP_UDEMY/projectUdemy/admin/includes/side_bar.php'?>
+     <?php include '/xampp/htdocs/PHP_UDEMY/projectUdemy/admin/includes/admin_side_bar.php'?>
      <!-- /.navbar-collapse -->
  </nav>
