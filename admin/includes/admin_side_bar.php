@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li>
-            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+            <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
         </li>
 
         <li>
@@ -10,15 +10,15 @@
                 Posts <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="posts_dropdown" class="collapse">
                 <li>
-                    <a href="#">View</a>
+                    <a href="./posts.php">View all posts</a>
                 </li>
                 <li>
-                    <a href="#">Dropdown item</a>
+                    <a href="posts.php?source=add_post">Add posts</a>
                 </li>
             </ul>
         </li>
         <li>
-            <a href="/admin//categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
+            <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
         </li>
 
         <li class="active">

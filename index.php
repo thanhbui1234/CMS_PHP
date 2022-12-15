@@ -1,3 +1,4 @@
+<?php ob_start()?>
 <?php include './includes/header.php'?>
 <?php include './includes/funtions.php'?>
 
@@ -26,6 +27,7 @@
     $title = $post['post_title'];
     $author = $post['post_author'];
     $time = $post['post_time'];
+    $img = $post['post_img'];
     $content = $post['post_content']?>
                 <h2>
                     <a href="#"><?php echo $title ?></a>
@@ -35,7 +37,7 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $time ?></p>
                 <hr>
-                <img class="img-responsive" src="/images//banner.jpg" alt="">
+                <img class="img-responsive" src="/images//<?php echo $img ?>" alt="">
                 <hr>
                 <p><?php echo $content ?></p>
                 <a class="btn btn-primary" href="#">Read More <span

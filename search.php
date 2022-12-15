@@ -27,7 +27,11 @@
     $title = $search['post_title'];
     $author = $search['post_author'];
     $time = $search['post_time'];
-    $content = $search['post_content']?>
+    $content = $search['post_content'];
+    $img = $search['post_img'];
+    ?>
+
+
                 <h2>
                     <a href="#"><?php echo $title ?></a>
                 </h2>
@@ -36,7 +40,7 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $time ?></p>
                 <hr>
-                <img class="img-responsive" src="/images//banner.jpg" alt="">
+                <img class="img-responsive" src="/images//<?php echo $img; ?>" alt="">
                 <hr>
                 <p><?php echo $content ?></p>
                 <a class="btn btn-primary" href="#">Read More <span

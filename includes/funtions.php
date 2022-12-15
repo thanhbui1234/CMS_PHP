@@ -4,7 +4,7 @@ include './includes/db.php';
 function nav()
 {
     global $conn;
-    $sql = "SELECT cat_title FROM categories order by cat_title desc limit 4 ";
+    $sql = "SELECT cat_title FROM categories order by cat_title asc limit 3 ";
     $statement = $conn->prepare($sql);
 
     $statement->execute();

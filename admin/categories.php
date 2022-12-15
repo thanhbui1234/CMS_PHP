@@ -6,6 +6,7 @@
 <body>
 
 
+
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -21,6 +22,7 @@
                         <h1 class="page-header">
                             Welcome to admin
                             <small>Subheading</small>
+                            <!-- <button><a href="./includes/delete.php">delete</a></button> -->
 
                         </h1>
                         <div class="col-xs-6">
@@ -35,6 +37,12 @@
                                     <input type="submit" value="submit" name="submit" class="btn btn-primary">
                                 </div>
                             </form>
+                            <?php
+if (isset($_GET['update'])) {
+    include './includes/update_cat.php';
+
+}?>
+
                         </div>
                         <div class="col-xs-6">
                             <table class="table table-bordered">
@@ -42,6 +50,8 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Categories</th>
+                                        <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
