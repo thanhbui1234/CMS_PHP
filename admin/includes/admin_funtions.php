@@ -179,3 +179,62 @@ function showPosts()
     $dataPosts = $statement->fetchAll();
 
 }
+function selectEditPosts()
+{
+    if (isset($_GET['p_id'])) {
+        global $conn;
+        $id = $_GET['p_id'];
+        $sql = "SELECT * FROM posts where post_id = $id";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        global $dataPostsEdit;
+        $dataPostsEdit = $statement->fetchAll();
+
+    }
+}
+
+function updatePost()
+{
+    if (isset($_POST['create_post'])) {
+
+        global $conn;
+        $title = $_POST['post_title'];
+        $id = $_GET['p_id'];
+        $category_id = $_POST['category_id'];
+        $post_author = $_POST['post_author'];
+        $post_status = $_POST['post_status'];
+        $post_image = $_FILES['post_image']['name'];
+        $post_image_tmp = $_FILES['post_image']['tmp_name'];
+        $targe_dir = '../images//';
+        $target_file = $targe_dir . $post_image;
+        move_uploaded_file($post_image_tmp, $target_file);
+        $post_tag = $_POST['post_tag'];
+        $post_content = $_POST['post_content'];
+        $post_date = date("Y-m-d H:i a ");
+        $post_comment_count = 4;
+
+        $sql = " UPDATE posts set post_category_id = '$category_id' , post_title = '$title' , post_comment_count = '$post_comment_count', ";
+        $sql .= " post_author = '$post_author' , post_time = '$post_date' , post_img = '$post_image' ,post_content = '$post_content', post_tag = '$post_tag', ";
+        $sql .= " post_status = '$post_status'  where post_id = $id ";
+
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+
+    }
+
+}
+
+function selectcategoryPost()
+{
+    if (isset($_GET['p_id'])) {
+        global $conn;
+        $id = $_GET['p_id'];
+        $sql = "SELECT * from categories ";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        global $data;
+        $data = $statement->fetchAll();
+
+    }
+
+}

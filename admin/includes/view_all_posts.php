@@ -32,7 +32,15 @@ foreach ($dataPosts as $value) {
                                    <td> <?php echo $value['post_comment_count'] ?></td>
                                    <td> <?php echo $value['post_time'] ?></td>
                                    <td> <button> <a href="posts.php?delete=<?php echo $value['post_id'] ?>">DELETE</a>
-                                       </button> </td>
+                                       </button>
+
+                                       <button> <a
+                                               href="posts.php?source=edit_posts&p_id=<?php echo $value['post_id'] ?>">UPDATE</a>
+                                       </button>
+
+
+
+                                   </td>
 
                                </tr>
                                <?php
