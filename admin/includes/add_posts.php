@@ -3,6 +3,7 @@ addPost()
 
 ?>
 
+<!-- post_category_id -->
 <form enctype="multipart/form-data" action="#" method="POST">
 
     <div class="form-group">
@@ -10,14 +11,24 @@ addPost()
         <input type="text" class="form-control" name="post_title" id="post_title">
         <span class="text-danger"> <?php echo isset($err['title']) ? $err['title'] : ''; ?> </span>
     </div>
-
-
     <div class="form-group">
-        <label for="post_category_id">Post Category Id</label>
-        <input type="text" class="form-control" name="post_category_id" id="post_category_id">
-        <span class="text-danger"> <?php echo isset($err['post_category_id']) ? $err['post_category_id'] : ''; ?>
-        </span>
+        <label for="post_category_id">Post Category Id</label> <br>
 
+        <?php
+$sql = "SELECT * FROM categories ";
+$statement = $conn->prepare($sql);
+$statement->execute();
+$dataCategories = $statement->fetchAll();
+
+?>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="post_category_id"
+            id="">
+            <?php foreach ($dataCategories as $key) {?>
+            <br>
+            <option value="<?php echo $key['cat_id'] ?>"> <?php echo $key['cat_title'] ?></option>
+            <?php }?>
+
+        </select>
     </div>
 
 
