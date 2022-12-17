@@ -10,6 +10,8 @@ addPost()
         <input type="text" class="form-control" name="post_title" id="post_title">
         <span class="text-danger"> <?php echo isset($err['title']) ? $err['title'] : ''; ?> </span>
     </div>
+
+
     <div class="form-group">
         <label for="post_category_id">Post Category Id</label>
         <input type="text" class="form-control" name="post_category_id" id="post_category_id">

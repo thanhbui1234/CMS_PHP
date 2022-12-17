@@ -13,13 +13,18 @@ selectEditPosts();
         <input type="text" value="<?php echo $value['post_title'] ?>" class="form-control" name="post_title"
             id="post_title">
     </div>
+
+
+
+
+
     <div class="form-group">
         <?php
-selectcategoryPost();
+
+    selectcategoryPost();
 
     ?>
-
-        <select name="category_id" id="">
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category_id" id="">
             <?php foreach ($data as $key) {?>
             <option value="<?php echo $key['cat_id'] ?>"> <?php echo $key['cat_title'] ?></option>
             <?php }?>
@@ -27,6 +32,8 @@ selectcategoryPost();
         </select>
 
     </div>
+
+
 
 
 
@@ -49,9 +56,10 @@ selectcategoryPost();
     <div class="form-group">
         <label for="post_image">Post Image</label> <br>
         <input type="file" name=" post_image" id="post_image"> <br>
-        <img width="100" src="../images//<?php echo $value['post_img'] ?>" alt="">
+        <img width="100" src="/images//<?php echo $value['post_img'] ?>" alt="">
 
     </div>
+
 
 
 
