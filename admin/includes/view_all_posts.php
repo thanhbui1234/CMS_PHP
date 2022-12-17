@@ -24,7 +24,20 @@ foreach ($dataPosts as $value) {
                                    <td> <?php echo $value['post_id'] ?></td>
                                    <td> <?php echo $value['post_author'] ?></td>
                                    <td> <?php echo $value['post_title'] ?></td>
-                                   <td> <?php echo $value['post_category_id'] ?></td>
+
+
+                                   <?php
+$sql = "SELECT * FROM categories where cat_id = $value[post_category_id]";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $datapots = $statement->fetchAll();
+    foreach ($datapots as $post) {
+        ?>
+                                   <td> <?php echo $post['cat_title'] ?></td>
+                                   <?php }?>
+
+
+
                                    <td> <?php echo $value['post_status'] ?></td>
                                    <td><img width="50" src="/images//<?php echo $value['post_img'] ?>"
                                            alt="<?php echo $value['post_img'] ?>"></td>

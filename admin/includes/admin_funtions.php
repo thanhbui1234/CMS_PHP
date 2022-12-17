@@ -66,7 +66,7 @@ function addPost()
         if (empty($err)) {
 
             $sql = " INSERT INTO posts (post_category_id,post_title,post_author,post_time,post_img,post_content,post_tag,post_comment_count,post_status)";
-            $sql .= " VALUES('$post_category_id','$title','$post_author','$post_date','$post_image','$post_content','$post_tag','$post_comment_count','$post_status')";
+            $sql .= " VALUES('$post_category_id','$title','$post_author','$post_date','$post_image','$post_content','$post_tag','$post_comment_count','$post_status') ";
             $statement = $conn->prepare($sql);
             if ($statement->execute()) {
                 echo "<script>
@@ -208,6 +208,19 @@ function updatePost()
         $targe_dir = '../images//';
         $target_file = $targe_dir . $post_image;
         move_uploaded_file($post_image_tmp, $target_file);
+
+        //header("Location: /./admin//categories.php)
+        if (empty($post_image)) {
+            $sql = "SELECT post_img FROM posts where post_id = $id";
+            $statement = $conn->prepare($sql);
+            $statement->execute();
+            $data1 = $statement->fetchAll();
+            foreach ($data1 as $row) {
+                $post_image = $row['post_img'];
+            }
+
+        }
+
         $post_tag = $_POST['post_tag'];
         $post_content = $_POST['post_content'];
         $post_date = date("Y-m-d H:i a ");
@@ -238,3 +251,6 @@ function selectcategoryPost()
     }
 
 }
+
+?>
+<img src="//admin/posts.php" alt="">

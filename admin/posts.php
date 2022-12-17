@@ -1,5 +1,6 @@
 <?php include './includes/admin_header.php'?>
 <?php include './includes/admin_funtions.php'?>
+<?php include '/xampp/htdocs/PHP_UDEMY/projectUdemy/includes/db.php'?>
 
 
 
