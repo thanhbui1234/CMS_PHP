@@ -210,6 +210,8 @@ function updatePost()
         move_uploaded_file($post_image_tmp, $target_file);
 
         //header("Location: /./admin//categories.php)
+
+        // giữ lại được ảnh ban đầu muốn chỉnh sửa
         if (empty($post_image)) {
             $sql = "SELECT post_img FROM posts where post_id = $id";
             $statement = $conn->prepare($sql);

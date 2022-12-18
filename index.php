@@ -24,23 +24,28 @@
                 <!-- First Blog Post -->
                 <?php posts()?>
                 <?php foreach ($dataPots as $post) {
+
+    $post_id = $post['post_id'];
     $title = $post['post_title'];
     $author = $post['post_author'];
     $time = $post['post_time'];
     $img = $post['post_img'];
     $content = $post['post_content']?>
                 <h2>
-                    <a href="#"><?php echo $title ?></a>
+                    <a href="./post.php?id= <?php echo $post_id ?> "><?php echo $title ?></a>
                 </h2>
                 <p class="lead">
                     by <a href="index.php"><?php echo $author ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $time ?></p>
                 <hr>
-                <img class="img-responsive" src="/images//<?php echo $img ?>" alt="">
+                <a href="./post.php?id= <?php echo $post_id ?> ">
+                    <img class="img-responsive" src="/images//<?php echo $img ?>" alt="">
+                </a>
+
                 <hr>
                 <p><?php echo $content ?></p>
-                <a class="btn btn-primary" href="#">Read More <span
+                <a class="btn btn-primary" href="./post.php?id= <?php echo $post_id ?> ">Read More <span
                         class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>

@@ -42,6 +42,19 @@ function posts()
     $dataPots = $statement->fetchAll();
 
 }
+function postsOnly()
+{
+    if (isset($_GET['id'])) {
+        global $conn;
+        $id = $_GET['id'];
+        $sql = "SELECT * from posts where post_id = '$id'";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        global $dataPots;
+        $dataPots = $statement->fetchAll();
+    }
+
+}
 
 function search()
 {
