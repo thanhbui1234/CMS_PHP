@@ -76,6 +76,7 @@ Swal.fire(
     'success'
 )
 </script>";
+
             }
 
         }
@@ -91,6 +92,7 @@ function deletePost()
         $sql = " DELETE FROM posts WHERE post_id = $id";
         $statement = $conn->prepare($sql);
         $statement->execute();
+        // header("Location: posts.php");
     }
 
 }
@@ -179,6 +181,18 @@ function showPosts()
     $dataPosts = $statement->fetchAll();
 
 }
+
+function showCommnets()
+{
+    global $conn;
+    $sql = "SELECT * FROM commnets ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    global $Datacommnets;
+    $Datacommnets = $statement->fetchAll();
+
+}
+
 function selectEditPosts()
 {
     if (isset($_GET['p_id'])) {
@@ -253,6 +267,3 @@ function selectcategoryPost()
     }
 
 }
-
-?>
-<img src="//admin/posts.php" alt="">

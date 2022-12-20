@@ -30,7 +30,7 @@
     $author = $post['post_author'];
     $time = $post['post_time'];
     $img = $post['post_img'];
-    $content = $post['post_content']?>
+    $content = substr($post['post_content'], 0, 100) . '..........'?>
                 <h2>
                     <a href="./post.php?id= <?php echo $post_id ?> "><?php echo $title ?></a>
                 </h2>

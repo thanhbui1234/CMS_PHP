@@ -22,7 +22,7 @@
         </li>
 
         <li class="active">
-            <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Comments</a>
+            <a href="./commnet.php"><i class="fa-solid fa-comment"></i> Comments</a>
         </li>
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>

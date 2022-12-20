@@ -1,3 +1,4 @@
+<?php ob_start()?>
 <?php include './includes/header.php'?>
 <?php include './includes/funtions.php'?>
 
@@ -21,35 +22,34 @@
                 </h1>
 
                 <!-- First Blog Post -->
-                <?php search()?>
-                <?php if ($dataSearch) {?>
-                <?php foreach ($dataSearch as $search) {
-    $title = $search['post_title'];
-    $author = $search['post_author'];
-    $time = $search['post_time'];
-    $content = $search['post_content'];
-    $img = $search['post_img'];
-    ?>
+                <?php allCategory()?>
+                <?php foreach ($dataALLcATEGORY as $post) {
 
-
+    $post_id = $post['post_id'];
+    $title = $post['post_title'];
+    $author = $post['post_author'];
+    $time = $post['post_time'];
+    $img = $post['post_img'];
+    $content = substr($post['post_content'], 0, 100) . '..........'?>
                 <h2>
-                    <a href="#"><?php echo $title ?></a>
+                    <a href="./post.php?id= <?php echo $post_id ?> "><?php echo $title ?></a>
                 </h2>
                 <p class="lead">
                     by <a href="index.php"><?php echo $author ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $time ?></p>
                 <hr>
-                <img class="img-responsive" src="/images//<?php echo $img; ?>" alt="">
+                <a href="./post.php?id= <?php echo $post_id ?> ">
+                    <img class="img-responsive" src="/images//<?php echo $img ?>" alt="">
+                </a>
+
                 <hr>
                 <p><?php echo $content ?></p>
-                <a class="btn btn-primary" href="#">Read More <span
+                <a class="btn btn-primary" href="./post.php?id= <?php echo $post_id ?> ">Read More <span
                         class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-                <?php }} else {
-    echo "<h1 class='text-danger'> <i class=' fa-regular fa-face-sad-tear'></i>  Nothing to search  </h1>";
-}?>
+                <?php }?>
 
             </div>
 
@@ -67,4 +67,4 @@
         <!-- /.container -->
 
         <!-- jQuery -->
-        <?php include './includes/footer. php'?>
+        <?php include './includes/footer.php'?>

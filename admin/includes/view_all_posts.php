@@ -1,4 +1,4 @@
-                       <table class="table table-responsive table-condensed">
+                       <table class="table table-responsive table-condensed table-bordered">
                            <thead>
                                <tr>
                                    <th>ID</th>

@@ -16,9 +16,15 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
+                <?php
+addCommnet();
+
+?>
+
+
                 <h1 class="page-header">
                     Page Heading
-                    <small>Secondary Text</small>
+                    <small>Bùi Chí Thanh</small>
                 </h1>
 
                 <!-- First Blog Post -->
@@ -54,11 +60,30 @@
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
-                    <form role="form">
+                    <form method="POST" action="" role="form">
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <label for="">Author</label>
+                            <input name="commnet_author" class="form-control" type="text">
+                            <h3 class="text-danger"> <?php echo isset($errCmt['author']) ? $errCmt['author'] : ''; ?>
+                            </h3>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input name="commnet_email" class="form-control" type="email">
+                            <h3 class="text-danger"> <?php echo isset($errCmt['commnet']) ? $errCmt['commnet'] : ''; ?>
+                            </h3>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Your commnet</label>
+                            <textarea name="commnet_content" class="form-control" rows="3"></textarea>
+                            <h3 class="text-danger">
+                                <?php echo isset($errCmt['commnet_content']) ? $errCmt['commnet_content'] : ''; ?> </h3>
+
+                        </div>
+                        <button type="submit" name="create_submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
 

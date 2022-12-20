@@ -4,7 +4,7 @@ include './includes/db.php';
 function nav()
 {
     global $conn;
-    $sql = "SELECT cat_title FROM categories order by cat_title asc limit 3 ";
+    $sql = "SELECT cat_title FROM categories  ";
     $statement = $conn->prepare($sql);
 
     $statement->execute();
@@ -19,14 +19,16 @@ function blogCategories()
 {
 
     global $conn;
-    $sql = "SELECT cat_title FROM categories order by cat_title asc limit 3";
+    $sql = "SELECT * FROM categories ";
     $statement = $conn->prepare($sql);
 
     $statement->execute();
     $dataBlog = $statement->fetchAll();
     foreach ($dataBlog as $blog) {
+
         echo "<li>
-             <a href='#'>$blog[cat_title]</a>
+<a href='../category.php?id=$blog[cat_id]'>$blog[cat_title]</a>
+
             </li>";
     }
 
@@ -65,4 +67,64 @@ function search()
     $statement->execute();
     global $dataSearch;
     $dataSearch = $statement->fetchAll();
+}
+
+function allCategory()
+{
+    if (isset($_GET['id'])) {
+        global $conn;
+        $id = $_GET['id'];
+        $sql = "select * from posts where post_category_id = $id ";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        global $dataALLcATEGORY;
+        $dataALLcATEGORY = $statement->fetchAll();
+
+        // var_dump($dataALLcATEGORY);
+
+    }
+
+}
+
+function addCommnet()
+{
+    if (isset($_POST['create_submit'])) {
+        global $conn;
+        $author = $_POST['commnet_author'];
+        $email = $_POST['commnet_email'];
+        $commnet_content = $_POST['commnet_content'];
+        $date = date("Y-m-d H:i a ");
+        $post_id = $_GET['id'];
+
+        global $errCmt;
+        $errCmt = [];
+
+        if (empty($author)) {
+
+            $errCmt['author'] = 'Please enter a author';
+
+        }
+
+        if (empty($email)) {
+
+            $errCmt['commnet'] = 'Please enter a commnet';
+
+        }
+        if (empty($commnet_content)) {
+
+            $errCmt['commnet_content'] = 'Please enter a content';
+
+        }
+
+        if (empty($errCmt)) {
+
+            $sql = " INSERT INTO commnets (commnet_post_id,commnet_author,commnet_email,commnet_content,commnet_status,commnet_date )";
+            $sql .= " VALUES ($post_id,'$author','$email','$commnet_content','unapproved','$date' )";
+            $statement = $conn->prepare($sql);
+            $statement->execute();
+
+        }
+
+    }
+
 }
