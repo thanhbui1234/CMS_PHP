@@ -69,17 +69,24 @@ function addPost()
             $sql .= " VALUES('$post_category_id','$title','$post_author','$post_date','$post_image','$post_content','$post_tag','$post_comment_count','$post_status') ";
             $statement = $conn->prepare($sql);
             if ($statement->execute()) {
-                echo "<script>
-Swal.fire(
-    'Good job!',
-    'You clicked the button!',
-    'success'
-)
-</script>";
-
+                header("Location: /admin/posts.php");
             }
 
         }
+
+    }
+
+}
+function deleteCmt()
+{
+
+    if (isset($_GET['idCmt'])) {
+        $id = $_GET['idCmt'];
+        global $conn;
+        $sql = "DELETE FROM commnets where commnet_id  = $id";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        header("Location: commnet.php");
 
     }
 

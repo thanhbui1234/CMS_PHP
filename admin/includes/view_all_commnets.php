@@ -41,7 +41,8 @@ foreach ($Datacommnets as $value) {
 
                                    <td>Approve</td>
                                    <td>Unapprove</td>
-                                   <td> <button> <a href="posts.php?delete=">DELETE</a>
+                                   <td> <button> <a
+                                               href="commnet.php?idCmt=<?php echo $value['commnet_id'] ?>">DELETE</a>
                                        </button>
                                    </td>
 

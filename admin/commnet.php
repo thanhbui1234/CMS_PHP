@@ -14,7 +14,7 @@
         <?php include './includes/admin_nav.php'?>
 
         <!-- delete post -->
-        <?php deletePost()?>
+        <?php deleteCmt()?>
 
         <div id="page-wrapper">
 
