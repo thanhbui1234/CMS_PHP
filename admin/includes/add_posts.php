@@ -41,11 +41,15 @@ $dataCategories = $statement->fetchAll();
 
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status" id="post_status">
-        <span class="text-danger"> <?php echo isset($err['post_status']) ? $err['post_status'] : ''; ?> </span>
+        <label for="post_status">Post Status</label> <br>
+        <select class="form-select" aria-label="Default select example" name="post_status" id="">
+            <option value="publised">Publised</option>
+            <option value="draf">Draf</option>
+        </select>
 
     </div>
+
+
 
 
     <div class="form-group">

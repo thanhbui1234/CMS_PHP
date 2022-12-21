@@ -37,7 +37,7 @@ function blogCategories()
 function posts()
 {
     global $conn;
-    $sql = "SELECT * from posts";
+    $sql = "SELECT * from posts where post_status = 'publised' order by post_id desc";
     $statement = $conn->prepare($sql);
     $statement->execute();
     global $dataPots;
@@ -86,6 +86,22 @@ function allCategory()
 
 }
 
+function showCmt()
+{
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+
+        global $conn;
+        $sql = "SELECT * from commnets where commnet_post_id  = $id and commnet_status = 'Approve'";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        global $datacmt;
+        $datacmt = $statement->fetchAll();
+
+    }
+
+}
+
 function addCommnet()
 {
     if (isset($_POST['create_submit'])) {
@@ -119,9 +135,13 @@ function addCommnet()
         if (empty($errCmt)) {
 
             $sql = " INSERT INTO commnets (commnet_post_id,commnet_author,commnet_email,commnet_content,commnet_status,commnet_date )";
-            $sql .= " VALUES ($post_id,'$author','$email','$commnet_content','unapproved','$date' )";
+            $sql .= " VALUES ($post_id,'$author','$email','$commnet_content','  Unapproved','$date' )";
             $statement = $conn->prepare($sql);
             $statement->execute();
+
+            $sql2 = " UPDATE posts set post_comment_count =  post_comment_count + 1  where post_id  = $post_id";
+            $statement2 = $conn->prepare($sql2);
+            $statement2->execute();
 
         }
 

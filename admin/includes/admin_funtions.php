@@ -40,7 +40,7 @@ function addPost()
         $post_tag = $_POST['post_tag'];
         $post_content = $_POST['post_content'];
         $post_date = date("Y-m-d H:i a ");
-        $post_comment_count = 4;
+        // $post_comment_count = 0;
         global $err;
         $err = [];
         if (empty($title)) {
@@ -52,9 +52,9 @@ function addPost()
         if (empty($post_author)) {
             $err['post_author'] = 'This  here is not empty';
         }
-        if (empty($post_status)) {
-            $err['post_status'] = 'This  here is not empty';
-        }
+        // if (empty($post_status)) {
+        //     $err['post_status'] = 'This  here is not empty';
+        // }
         if (empty($post_image)) {
             $err['post_image'] = 'This  here is not empty';
         }
@@ -65,12 +65,22 @@ function addPost()
 
         if (empty($err)) {
 
-            $sql = " INSERT INTO posts (post_category_id,post_title,post_author,post_time,post_img,post_content,post_tag,post_comment_count,post_status)";
-            $sql .= " VALUES('$post_category_id','$title','$post_author','$post_date','$post_image','$post_content','$post_tag','$post_comment_count','$post_status') ";
+            echo " hehe";
+
+            $sql = " INSERT INTO posts (post_category_id,post_title,post_author,post_time,post_img,post_content,post_tag,post_status)
+  VALUES('$post_category_id','$title','$post_author','$post_date','$post_image','$post_content','$post_tag','$post_status') ";
             $statement = $conn->prepare($sql);
             if ($statement->execute()) {
                 header("Location: /admin/posts.php");
             }
+
+            // $sql = " INSERT INTO posts (post_category_id,post_title,post_author,post_time,post_img,post_content,post_tag,post_status)";
+            // $sql .= " VALUES('$post_category_id','$title','$post_author','$post_date','$post_image','$post_content','$post_tag','$post_status') ";
+            // $statement = $conn->prepare($sql);
+            // $statement->execute();
+            // if ($statement->execute()) {
+            //     header("Location: /admin/posts.php");
+            // }
 
         }
 
@@ -91,6 +101,37 @@ function deleteCmt()
     }
 
 }
+
+function approvedCmt()
+{
+
+    if (isset($_GET['approve'])) {
+        $id = $_GET['approve'];
+        global $conn;
+        $sql = "UPDATE commnets set commnet_status = 'Approve' where commnet_id  = $id";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        header("Location: commnet.php");
+
+    }
+
+}
+
+function unapproveCmt()
+{
+
+    if (isset($_GET['unapprove'])) {
+        $id = $_GET['unapprove'];
+        global $conn;
+        $sql = "UPDATE commnets set commnet_status = 'Unapprove' where commnet_id  = $id";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        header("Location: commnet.php");
+
+    }
+
+}
+
 function deletePost()
 {
     if (isset($_GET['delete'])) {
@@ -181,7 +222,7 @@ function addCategories()
 function showPosts()
 {
     global $conn;
-    $sql = "SELECT * FROM posts ";
+    $sql = "SELECT * FROM posts order by post_id  DESC ";
     $statement = $conn->prepare($sql);
     $statement->execute();
     global $dataPosts;
@@ -255,6 +296,8 @@ function updatePost()
 
         $statement = $conn->prepare($sql);
         $statement->execute();
+
+        header('location: ./posts.php');
 
     }
 

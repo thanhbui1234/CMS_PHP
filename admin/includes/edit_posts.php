@@ -45,10 +45,13 @@ selectEditPosts();
     </div>
 
 
+
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input value="<?php echo $value['post_status'] ?>" type="text" class="form-control" name="post_status"
-            id="post_status">
+        <label for="post_status">Post Status</label> <br>
+        <select class="form-select" aria-label="Default select example" name="post_status" id="">
+            <option value="publised">Publised</option>
+            <option value="draf">Draf</option>
+        </select>
 
     </div>
 

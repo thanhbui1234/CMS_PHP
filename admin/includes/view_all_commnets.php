@@ -39,11 +39,17 @@ foreach ($Datacommnets as $value) {
                                    <?php }?>
                                    <td> <?php echo $value['commnet_date'] ?></td>
 
-                                   <td>Approve</td>
-                                   <td>Unapprove</td>
-                                   <td> <button> <a
-                                               href="commnet.php?idCmt=<?php echo $value['commnet_id'] ?>">DELETE</a>
-                                       </button>
+                                   <td> <a href="commnet.php?approve=<?php echo $value['commnet_id'] ?>">Approve</a>
+
+                                   </td>
+                                   <td> <a href="commnet.php?unapprove=<?php echo $value['commnet_id'] ?>">Unapprove</a>
+
+                                   </td>
+
+
+
+                                   <td> <a href="commnet.php?idCmt=<?php echo $value['commnet_id'] ?>">DELETE</a>
+
                                    </td>
 
                                </tr>

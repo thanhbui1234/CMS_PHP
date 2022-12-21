@@ -13,6 +13,17 @@
         <!-- Navigation -->
         <?php include './includes/admin_nav.php'?>
 
+
+        <!-- Phê duyệt commnet -->
+        <?php approvedCmt()?>
+        <?php unapproveCmt()?>
+
+
+
+
+
+
+
         <!-- delete post -->
         <?php deleteCmt()?>
 

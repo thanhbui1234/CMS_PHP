@@ -33,14 +33,16 @@
 
 
                 <h2>
-                    <a href="#"><?php echo $title ?></a>
+                    <a href="./post.php?id=<?php echo $search['post_id'] ?>"><?php echo $title ?></a>
                 </h2>
                 <p class="lead">
                     by <a href="index.php"><?php echo $author ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $time ?></p>
                 <hr>
-                <img class="img-responsive" src="/images//<?php echo $img; ?>" alt="">
+
+                <a href="./post.php?id=<?php echo $search['post_id'] ?>"> <img class="img-responsive"
+                        src="/images//<?php echo $img; ?>" alt=""></a>
                 <hr>
                 <p><?php echo $content ?></p>
                 <a class="btn btn-primary" href="#">Read More <span
@@ -67,4 +69,5 @@
         <!-- /.container -->
 
         <!-- jQuery -->
-        <?php include './includes/footer. php'?>
+
+        <?php include './includes/footer.php    '?>
