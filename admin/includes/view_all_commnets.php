@@ -1,6 +1,10 @@
                        <table class="table table-responsive table-condensed table-bordered">
                            <thead>
                                <tr>
+
+
+
+
                                    <th>ID</th>
                                    <th>Author</th>
                                    <th>Commnet</th>

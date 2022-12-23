@@ -23,6 +23,66 @@ function showCat()
 
 }
 
+function addUsers()
+{
+    if (isset($_POST['create_user'])) {
+        global $conn;
+        $userEmail = $_POST['user_email'];
+        $userName = $_POST['user_name'];
+        $user_firstname = $_POST['user_firstName'];
+        $user_lastname = $_POST['user_Lastname'];
+        $user_Password = $_POST['user_password'];
+        $user_role = $_POST['user_role'];
+
+        global $errUser;
+        $errUser = [];
+
+        if (empty($userEmail)) {
+            $errUser['email'] = ' Bạn phải nhập email';
+
+        }
+        if (empty($userName)) {
+            $errUser['userName'] = ' Bạn phải nhập user name';
+
+        }
+        if (empty($user_firstname)) {
+            $errUser['user_firstname'] = ' Bạn phải nhập first name';
+
+        }
+        if (empty($user_lastname)) {
+            $errUser['user_lastname'] = ' Bạn phải nhập last name';
+        }
+        if (empty($user_Password)) {
+            $errUser['user_Password'] = ' Bạn phải nhập password';
+        }
+
+        if (empty($errUser)) {
+
+            $sql = "INSERT INTO users (user_name,user_password,user_firstname,user_lastname,user_email,user_role)";
+            $sql .= " VALUES ('$userName','$user_Password','$user_firstname','$user_lastname','$userEmail','$user_role')   ";
+            $statement = $conn->prepare($sql);
+            $statement->execute();
+            header("Location: /admin/user.php");
+
+        }
+
+    }
+
+}
+function deleteUsers()
+{
+
+    if (isset($_GET['delete'])) {
+        global $conn;
+        $idUser = $_GET['delete'];
+        $sql = "DELETE FROM users WHERE user_id = $idUser";
+        $statement = $conn->prepare($sql);
+        if ($statement->execute()) {
+            header("Location: /admin/user.php");
+        }
+
+    }
+}
 function addPost()
 {
     if (isset($_POST['create_post'])) {
@@ -87,6 +147,17 @@ function addPost()
     }
 
 }
+
+function showUsers()
+{
+    global $conn;
+    $sql = "SELECT * FROM users ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    global $dataUser;
+    $dataUser = $statement->fetchAll();
+
+}
 function deleteCmt()
 {
 
@@ -132,6 +203,57 @@ function unapproveCmt()
 
 }
 
+function adminUser()
+{
+
+    if (isset($_GET['admin'])) {
+        $id = $_GET['admin'];
+        global $conn;
+        $sql = "UPDATE users set user_role = 'admin' where user_id   = $id";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        header("Location: user.php");
+
+    }
+
+}
+function updateUsers()
+{
+    if (isset($_POST['updateUser'])) {
+
+        global $conn;
+        $id_user = $_GET['id_user'];
+        $userEmail = $_POST['user_email'];
+        $userName = $_POST['user_name'];
+        $user_firstname = $_POST['user_firstName'];
+        $user_lastname = $_POST['user_Lastname'];
+        $user_Password = $_POST['user_password'];
+        $user_role = $_POST['user_role'];
+
+        $sql = "UPDATE users  SET  user_name = '$userName' , user_Password = '$user_Password' , user_firstname = '$user_firstname' ";
+        $sql .= "  , user_lastname='$user_lastname' , user_email = '$userEmail' , user_role = '$user_role' WHERE user_id = $id_user ";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        header("Location: user.php");
+
+    }
+
+}
+function subscriberUser()
+{
+
+    if (isset($_GET['subscriber'])) {
+        $id = $_GET['subscriber'];
+        global $conn;
+        $sql = "UPDATE users set user_role = 'subscriber' where user_id   = $id";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        header("Location: user.php");
+
+    }
+
+}
+
 function deletePost()
 {
     if (isset($_GET['delete'])) {
@@ -141,6 +263,21 @@ function deletePost()
         $statement = $conn->prepare($sql);
         $statement->execute();
         // header("Location: posts.php");
+    }
+
+}
+function selectUpdateUsers()
+{
+
+    if (isset($_GET['id_user'])) {
+        $id_user = $_GET['id_user'];
+        global $conn;
+        $sql = "SELECT * FROM users WHERE user_id = $id_user";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        global $dataUsers;
+        $dataUsers = $statement->fetchAll();
+
     }
 
 }

@@ -21,23 +21,23 @@
             <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
         </li>
 
-        <li class="active">
+        <li class="">
             <a href="./commnet.php"><i class="fa-solid fa-comment"></i> Comments</a>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
-                Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa-solid fa-user"></i>
+                User <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="demo" class="collapse">
                 <li>
-                    <a href="#">Dropdown Item</a>
+                    <a href="./user.php">View all user</a>
                 </li>
                 <li>
-                    <a href="#">Dropdown Item</a>
+                    <a href="user.php?source=add_user">Add user</a>
                 </li>
             </ul>
         </li>
         <li>
-            <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Profile</a>
+            <a href="profile.php"><i class="fa-regular fa-id-card"></i> Profile</a>
         </li>
     </ul>
 </div>
