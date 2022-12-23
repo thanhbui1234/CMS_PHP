@@ -16,8 +16,6 @@ selectEditPosts();
 
 
 
-
-
     <div class="form-group">
         <?php
 
