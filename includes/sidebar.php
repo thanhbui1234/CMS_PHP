@@ -21,6 +21,30 @@
          <!-- /.input-group -->
      </div>
 
+
+     <div class="well">
+
+
+         <form action="../admin//includes//login.php" method="POST">
+             <h4>Login Admin</h4>
+             <div class="form-group">
+                 <input class="form-control" name="username" placeholder="Username" type="text">
+             </div>
+             <div class="form-group">
+                 <input class="form-control" name="password" placeholder="Password" type="password">
+             </div>
+             <span><?php echo isset($errLogin['error']) ? $errLogin['error'] : ''; ?></span>
+
+             <div class="input-group">
+                 <input class=" btn btn-primary" name="login" value="Login" placeholder="Password" type="submit">
+             </div>
+
+
+
+         </form>
+         <!-- /.input-group -->
+     </div>
+
      <!-- Blog Categories Well -->
      <div class="well">
          <h4>Blog Categories</h4>

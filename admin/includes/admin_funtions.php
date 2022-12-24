@@ -239,6 +239,29 @@ function updateUsers()
     }
 
 }
+
+function updateUsers2()
+{
+    if (isset($_POST['updateUser2'])) {
+
+        global $conn;
+
+        $userEmail = $_POST['user_email'];
+        $userName = $_POST['user_name'];
+        $user_firstname = $_POST['user_firstName'];
+        $user_lastname = $_POST['user_Lastname'];
+        $user_Password = $_POST['user_password'];
+        $user_role = $_POST['user_role'];
+        $sql = " UPDATE users  SET  user_name = '$userName' , user_Password = '$user_Password' , user_firstname = '$user_firstname' ";
+        $sql .= "  , user_lastname='$user_lastname' , user_email = '$userEmail' , user_role = '$user_role'  WHERE  user_name = '$_SESSION[user_name]' ";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        header("Location: user.php");
+
+    }
+
+}
+
 function subscriberUser()
 {
 
@@ -266,6 +289,55 @@ function deletePost()
     }
 
 }
+
+function countPosts()
+{
+    global $conn;
+    $sql = " SELECT * FROM posts ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $dataCountPost = $statement->fetchAll();
+    global $countPosts;
+    echo $countPosts = count($dataCountPost);
+
+}
+
+function countCmt()
+{
+    global $conn;
+    $sql = " SELECT * FROM commnets ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $dataCountCmt = $statement->fetchAll();
+    global $countCmt;
+    echo $countCmt = count($dataCountCmt);
+
+}
+
+function countUsers()
+{
+    global $conn;
+    $sql = " SELECT * FROM users ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $dataCountCmt = $statement->fetchAll();
+    global $countUsers;
+    echo $countUsers = count($dataCountCmt);
+
+}
+
+function countCategories()
+{
+    global $conn;
+    $sql = " SELECT * FROM categories ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $dataCountCmt = $statement->fetchAll();
+    global $countCategories;
+    echo $countCategories = count($dataCountCmt);
+
+}
+
 function selectUpdateUsers()
 {
 
@@ -279,6 +351,17 @@ function selectUpdateUsers()
         $dataUsers = $statement->fetchAll();
 
     }
+
+}
+
+function showtable()
+{
+    global $conn;
+    $sql = "SHOW TABLES";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $dataaaa = $statement->fetchAll();
+    echo $countt = count($dataaaa);
 
 }
 
@@ -392,6 +475,23 @@ function selectEditPosts()
     }
 }
 
+function profileUser()
+{
+
+    if (isset($_SESSION['user_name'])) {
+
+        global $sessionUserName;
+        global $conn;
+        $sessionUserName = $_SESSION['user_name'];
+        $sql = "SELECT * FROM users WHERE user_name = '$sessionUserName'";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        global $dataSessionUsers;
+        $dataSessionUsers = $statement->fetchAll();
+
+    }
+}
+
 function updatePost()
 {
     if (isset($_POST['create_post'])) {
@@ -435,6 +535,60 @@ function updatePost()
         $statement->execute();
 
         header('location: ./posts.php');
+
+    }
+
+}
+function login()
+{
+    if (isset($_POST['login'])) {
+        global $conn;
+        $username = htmlspecialchars($username = $_POST['username']);
+        $password = htmlspecialchars($password = $_POST['password']);
+
+        $sql = "SELECT * FROM  users WHERE user_name = '$username' and user_password = '$password'";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $dataLogin = $statement->fetchAll();
+
+        foreach ($dataLogin as $loginUser) {
+
+            echo $user_id = $loginUser['user_id'];
+            echo $user_name = $loginUser['user_name'];
+            echo $user_password = $loginUser['user_password'];
+            echo $user_firstname = $loginUser['user_firstname'];
+            echo $user_lastname = $loginUser['user_lastname'];
+            echo $user_email = $loginUser['user_email'];
+            echo $user_role = $loginUser['user_role'];
+
+        }
+
+        // khi người dùng đăng nhập tk mk  nếu đúng thì sẽ trả về một mạng sai thì sẽ là mảng rỗng
+
+        // empty($dataLogin) ? header('location: /index.php') : header('location: /admin//index.php');
+
+        if (empty($dataLogin)) {
+            header('location: /index.php');
+
+        } else {
+
+            $_SESSION['user_name'] = $user_name;
+            $_SESSION['user_firstname'] = $user_firstname;
+            $_SESSION['user_lastname'] = $user_lastname;
+            $_SESSION['user_role'] = $user_role;
+
+            header('location: /admin//index.php');
+
+        }
+
+        // if (empty($dataLogin)) {
+
+        //     global $errLogin;
+        //     $errLogin['error'] = 'Ban phai nhap dung tk mat khau';
+
+        //     header('location: /index.php');
+
+        // }
 
     }
 

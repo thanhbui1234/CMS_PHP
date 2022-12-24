@@ -21,7 +21,8 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Welcome to admin
-                            <small>Subheading</small>
+                            <small><?php echo $_SESSION['user_name'] ?></small>
+
                             <!-- <button><a href="./includes/delete.php">delete</a></button> -->
 
                         </h1>
