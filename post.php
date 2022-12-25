@@ -47,8 +47,6 @@ addCommnet();
                 <img class="img-responsive" src="/images//<?php echo $img ?>" alt="">
                 <hr>
                 <p><?php echo $content ?></p>
-                <a class="btn btn-primary" href="#">Read More <span
-                        class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
                 <?php }?>
@@ -78,7 +76,7 @@ addCommnet();
 
                         <div class="form-group">
                             <label for="">Your commnet</label>
-                            <textarea name="commnet_content" class="form-control" rows="3"></textarea>
+                            <textarea id="summernote" name="commnet_content" class="form-control" rows="3"></textarea>
                             <h3 class="text-danger">
                                 <?php echo isset($errCmt['commnet_content']) ? $errCmt['commnet_content'] : ''; ?> </h3>
 

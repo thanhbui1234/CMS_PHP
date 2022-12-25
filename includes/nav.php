@@ -19,6 +19,22 @@
                      <a href='/admin//index.php'>Admin</a>
                  </li>
 
+
+                 <?php
+
+//// nếu là admin khi đang ở trang chính  thì khi ấn vào một bài post nào đó thì trên nav sẽ hiện link dẫn đến phần edit của bài post tương ứng
+
+if (isset($_SESSION['user_role'])) {
+
+    if (isset($_GET['id'])) {
+        echo "<li>
+                     <a href='admin//posts.php?source=edit_posts&p_id=$_GET[id]'>Edit Post</a>
+                 </li>";
+    }
+
+}
+?>
+
              </ul>
          </div>
          <!-- /.navbar-collapse -->

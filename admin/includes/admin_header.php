@@ -32,6 +32,7 @@ if (!isset($_SESSION['user_role'])) {
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/summernote.css">
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -47,6 +48,12 @@ if (!isset($_SESSION['user_role'])) {
     <![endif]-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
 </head>

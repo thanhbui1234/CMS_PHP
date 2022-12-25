@@ -47,8 +47,25 @@ selectEditPosts();
     <div class="form-group">
         <label for="post_status">Post Status</label> <br>
         <select class="form-select" aria-label="Default select example" name="post_status" id="">
-            <option value="publised">Publised</option>
-            <option value="draf">Draf</option>
+            <option value="<?php echo $value['post_status'] ?>"><?php echo $value['post_status'] ?>
+            </option>
+
+
+
+            <?php
+
+    echo $value['post_status'] === 'draf' ? '<option value="published" >published</option>' : '<option value="draf">draf</option>';
+
+    // if ($value['post_status'] === 'draf') {
+    //     echo '<option value="published" >published</option>';
+    // } else {
+    //     echo '<option value="draf">draf</option>';
+
+    // }
+    ?>
+
+
+
         </select>
 
     </div>
@@ -75,7 +92,7 @@ selectEditPosts();
 
     <div class="form-group">
         <label for="post_content">Post content</label>
-        <textarea class="form-control" name="post_content" id="" post_content cols="30" rows="10"><?php echo $value['post_content'] ?>
+        <textarea class="form-control" name="post_content" id="summernote" post_content cols="30" rows="10"><?php echo $value['post_content'] ?>
         </textarea>
 
 

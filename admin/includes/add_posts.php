@@ -70,9 +70,12 @@ $dataCategories = $statement->fetchAll();
 
     <div class="form-group">
         <label for="post_content">Post content</label>
-        <textarea class="form-control" name="post_content" id="" post_content cols="30" rows="10"></textarea>
+        <textarea class="form-control" name="post_content" id="summernote" post_content cols="30" rows="10"></textarea>
 
     </div>
+
+
+
 
     <div class="form-group">
         <input type="submit" value="Submit :)" class="form-control btn btn-primary " name="create_post"

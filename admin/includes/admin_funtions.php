@@ -302,6 +302,29 @@ function countPosts()
 
 }
 
+function countDrafPosts()
+{
+
+    global $conn;
+    $sql = " SELECT * FROM posts where post_status = 'draf' ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $dataCountPost = $statement->fetchAll();
+    global $countDrafPosts;
+    $countDrafPosts = count($dataCountPost);
+
+}function countPendingCmt()
+{
+    global $conn;
+    $sql = " SELECT * FROM commnets where commnet_status = 'Unapprove' ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $dataCountCmt = $statement->fetchAll();
+    global $countPendingCmt;
+    $countPendingCmt = count($dataCountCmt);
+
+}
+
 function countCmt()
 {
     global $conn;
@@ -323,6 +346,18 @@ function countUsers()
     $dataCountCmt = $statement->fetchAll();
     global $countUsers;
     echo $countUsers = count($dataCountCmt);
+
+}
+
+function countSubUsers()
+{
+    global $conn;
+    $sql = " SELECT * FROM users where user_role = 'subscriber' ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $dataCountCmt = $statement->fetchAll();
+    global $countSubUsers;
+    $countSubUsers = count($dataCountCmt);
 
 }
 

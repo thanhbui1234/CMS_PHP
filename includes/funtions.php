@@ -4,14 +4,14 @@ include './includes/db.php';
 function nav()
 {
     global $conn;
-    $sql = "SELECT cat_title FROM categories  ";
+    $sql = "SELECT * FROM categories  ";
     $statement = $conn->prepare($sql);
 
     $statement->execute();
     $dataNav = $statement->fetchAll();
     foreach ($dataNav as $nav) {
         echo "<li>
-             <a href='#'>$nav[cat_title]</a>
+             <a href='./linknav.php?title=$nav[cat_id]'>$nav[cat_title]</a>
             </li>";
     }
 }
@@ -67,6 +67,17 @@ function search()
     $statement->execute();
     global $dataSearch;
     $dataSearch = $statement->fetchAll();
+}
+
+function linkNav()
+{
+    global $conn;
+    $search = $_GET['title'];
+    $sql = "select * from posts where post_category_id = $search ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    global $linkNav;
+    $linkNav = $statement->fetchAll();
 }
 
 function allCategory()

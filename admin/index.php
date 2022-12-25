@@ -20,6 +20,11 @@
                             Welcome to admin
                             <small><?php echo $_SESSION['user_name'] ?></small>
 
+                            <?php countDrafPosts()?>
+                            <?php countPendingCmt()?>
+                            <?php countSubUsers()?>
+
+
                         </h1>
 
                         <!-- /.row -->
@@ -139,21 +144,15 @@
                         var data = google.visualization.arrayToDataTable([
                             ['Data', 'Count'],
 
-
                             <?php
-$arrDataCount = [$countPosts, $countCmt, $countUsers, $countCategories];
-$arrtitle = ['Posts', 'Commnets', 'Users', 'Categories'];
+$arrDataCount = [$countPosts, $countDrafPosts, $countCmt, $countPendingCmt, $countUsers, $countSubUsers, $countCategories];
+$arrtitle = ['Active Posts', 'Draf Posts', 'Commnets', 'Pending Commnets', 'Users', 'Subscriber', 'Categories'];
 
 $summTitle = count($arrDataCount);
-
 for ($i = 0; $i < $summTitle; $i++) {
-
     echo " ['$arrtitle[$i]'" . "," . "  $arrDataCount[$i]   ],";
-
 }
-
 ?>
-
                         ]);
 
                         var options = {
@@ -162,7 +161,6 @@ for ($i = 0; $i < $summTitle; $i++) {
                                 subtitle: '',
                             }
                         };
-
                         var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
                         chart.draw(data, google.charts.Bar.convertOptions(options));
