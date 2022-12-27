@@ -23,6 +23,46 @@ function showCat()
 
 }
 
+function bulk_options()
+{
+
+    if (isset($_POST['checkBoxArr'])) {
+        $checkBoxArr = $_POST['checkBoxArr'];
+        global $conn;
+
+        foreach ($checkBoxArr as $checkBox) {
+            $bulk_options = $_POST['bulk_options'];
+
+            switch ($bulk_options) {
+
+                case 'publised':
+
+                    $sql = "Update posts set  post_status = 'publised' where post_id = $checkBox  ";
+                    $statement = $conn->prepare($sql);
+                    $statement->execute();
+                    break;
+
+                case 'draf':
+
+                    $sql = "Update posts set  post_status = 'draf' where post_id = $checkBox  ";
+                    $statement = $conn->prepare($sql);
+                    $statement->execute();
+                    break;
+
+                case 'delete':
+
+                    $sql = " DELETE FROM posts WHERE post_id = $checkBox ";
+                    $statement = $conn->prepare($sql);
+                    $statement->execute();
+                    break;
+
+            }
+
+        }
+    }
+
+}
+
 function addUsers()
 {
     if (isset($_POST['create_user'])) {

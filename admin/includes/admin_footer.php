@@ -11,6 +11,8 @@
 <script src='js/summernote.min.js'>
 </script>
 
+<script src="js/checkbox.js"></script>
+
 <script>
 $(document).ready(function() {
     $('#summernote').summernote(
