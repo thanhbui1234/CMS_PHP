@@ -56,6 +56,9 @@ function bulk_options()
                     $statement->execute();
                     break;
 
+                default:echo 'Bạn phải chọn gì đó';
+                    break;
+
             }
 
         }
@@ -73,6 +76,9 @@ function addUsers()
         $user_lastname = $_POST['user_Lastname'];
         $user_Password = $_POST['user_password'];
         $user_role = $_POST['user_role'];
+        $cryptyy = '$2y$10$nguyenphuongthao111112';
+
+        $user_Password = crypt($user_Password, $cryptyy);
 
         global $errUser;
         $errUser = [];
@@ -291,6 +297,10 @@ function updateUsers2()
         $user_firstname = $_POST['user_firstName'];
         $user_lastname = $_POST['user_Lastname'];
         $user_Password = $_POST['user_password'];
+        $cryptyy = '$2y$10$nguyenphuongthao111112';
+
+        $user_Password = crypt($user_Password, $cryptyy);
+
         $user_role = $_POST['user_role'];
         $sql = " UPDATE users  SET  user_name = '$userName' , user_Password = '$user_Password' , user_firstname = '$user_firstname' ";
         $sql .= "  , user_lastname='$user_lastname' , user_email = '$userEmail' , user_role = '$user_role'  WHERE  user_name = '$_SESSION[user_name]' ";
@@ -614,12 +624,15 @@ function updatePost()
     }
 
 }
+
 function login()
 {
     if (isset($_POST['login'])) {
         global $conn;
         $username = htmlspecialchars($username = $_POST['username']);
         $password = htmlspecialchars($password = $_POST['password']);
+        $cryptyy = '$2y$10$nguyenphuongthao111112';
+        $password = crypt($password, $cryptyy);
 
         $sql = "SELECT * FROM  users WHERE user_name = '$username' and user_password = '$password'";
         $statement = $conn->prepare($sql);

@@ -36,8 +36,44 @@ function blogCategories()
 
 function posts()
 {
+
+    /// kèm phân trang
     global $conn;
-    $sql = "SELECT * from posts where post_status = 'publised' order by post_id desc";
+
+    $sqlCount = "SELECT * from posts where post_status = 'publised'";
+
+    $statementCount = $conn->prepare($sqlCount);
+    $statementCount->execute();
+    $dataCount = $statementCount->fetchAll();
+
+    // môi trang chỉ đc 5 bài sẽ phân sang trang khác
+    $perPage = 5;
+
+    $page = count($dataCount);
+
+    global $resultCountPage;
+    // ceil sẽ làm tròn số thấp phân   làm tròn nên
+
+    $resultCountPage = ceil($page / 5);
+
+    if (isset($_GET['page'])) {
+
+        $pageGet = $_GET['page'];
+
+    } else {
+
+        $pageGet = '';
+
+    }
+
+    if ($pageGet == '' || $pageGet == 1) {
+        $pageSelect = 0;
+    } else {
+        $pageSelect = ($pageGet * $perPage) - $perPage;
+
+    }
+
+    $sql = "SELECT * from posts where post_status = 'publised' order by post_id desc limit  $pageSelect , $perPage";
     $statement = $conn->prepare($sql);
     $statement->execute();
     global $dataPots;
@@ -67,6 +103,67 @@ function search()
     $statement->execute();
     global $dataSearch;
     $dataSearch = $statement->fetchAll();
+}
+
+function registrations()
+{
+    if (isset($_POST['submit'])) {
+        global $conn;
+
+// mã hóa code của người lạ
+        $first_name = htmlspecialchars($_POST['first_name']);
+        $last_name = htmlspecialchars($_POST['last_name']);
+
+        $username = htmlspecialchars($_POST['username']);
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+        global $errregistrations;
+        $errregistrations = [];
+        if (empty($first_name)) {
+
+            $errregistrations['first_name'] = ' Bạn phải nhập  first name';
+
+        }
+
+        if (empty($last_name)) {
+
+            $errregistrations['last_name'] = ' Bạn phải nhập last name';
+
+        }
+
+        if (empty($username)) {
+
+            $errregistrations['username'] = ' Bạn phải nhập user name';
+
+        }
+
+        if (empty($email)) {
+
+            $errregistrations['email'] = ' Bạn phải nhập email';
+
+        }
+
+        if (empty($password)) {
+
+            $errregistrations['password'] = ' Bạn phải nhập password';
+
+        }
+
+        if (empty($errregistrations)) {
+
+            // crypt password
+            $cryptyy = '$2y$10$nguyenphuongthao111112';
+
+            $password = crypt($password, $cryptyy);
+
+            $sql = "INSERT INTO users (user_firstname, user_lastname , user_name, user_password , user_email ,user_role) VALUES ('$first_name','$last_name','$username','$password','$email','subscriber')  ";
+            $statement = $conn->prepare($sql);
+            $statement->execute();
+
+        }
+
+    }
+
 }
 
 function linkNav()

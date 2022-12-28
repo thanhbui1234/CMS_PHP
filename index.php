@@ -51,6 +51,20 @@
                 <hr>
                 <?php }?>
 
+
+                <ul class="pager">
+                    <?php
+for ($i = 1; $i <= $resultCountPage; $i++) {
+
+    echo "<li><a href='index.php?page=$i'>$i</a></li>";
+
+}
+
+?>
+
+                </ul>
+
+
             </div>
 
             <!-- Blog Sidebar Widgets Column -->

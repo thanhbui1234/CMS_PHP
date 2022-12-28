@@ -14,13 +14,15 @@ bulk_options();
                 <option value="publised">Publised</option>
                 <option value="draf">Draf</option>
                 <option value="delete">Delete</option>
+                <option value="clone">Clone</option>
+
             </select>
 
         </div>
 
         <div class="col-xs-4 ">
             <input class="btn btn-success" value="Apply" type="submit" name="submit">
-            <a href="add_posts.php" class="btn btn-primary">Add new</a>
+            <a href="posts.php?source=add_post" class="btn btn-primary">Add new</a>
         </div>
 
 
@@ -53,9 +55,7 @@ foreach ($dataPosts as $value) {
 
                 <td> <?php echo $value['post_id'] ?></td>
                 <td> <?php echo $value['post_author'] ?></td>
-                <td> <?php echo $value['post_title'] ?></td>
-
-
+                <td> <a href="/post.php?id=<?php echo $value['post_id'] ?>"><?php echo $value['post_title'] ?> </a></td>
                 <?php
 $sql = "SELECT * FROM categories where cat_id = $value[post_category_id]";
     $statement = $conn->prepare($sql);
