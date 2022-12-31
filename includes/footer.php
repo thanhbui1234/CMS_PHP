@@ -19,6 +19,8 @@
      <script src='js/summernote.min.js'>
      </script>
 
+     <script src="js/page.js"></script>
+
      <script>
 $(document).ready(function() {
     $('#summernote').summernote(

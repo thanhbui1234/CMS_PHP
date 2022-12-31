@@ -5,6 +5,7 @@
 
 <body>
 
+
     <!-- Navigation -->
     <?php include './includes/nav.php'?>
 
@@ -15,6 +16,7 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
+
 
                 <h1 class="page-header">
                     Page Heading
@@ -53,10 +55,16 @@
 
 
                 <ul class="pager">
+
+
+                    <!--  css stlye cho phân trang -->
+
                     <?php
 for ($i = 1; $i <= $resultCountPage; $i++) {
 
-    echo "<li><a href='index.php?page=$i'>$i</a></li>";
+    isset($_GET['page']) ? $hehe = $_GET['page'] : $hehe = null;
+
+    echo $hehe == $i ? "<li><a class='active' href='index.php?page=$i'>$i</a></li>" : "<li><a href='index.php?page=$i'>$i</a></li>";
 
 }
 

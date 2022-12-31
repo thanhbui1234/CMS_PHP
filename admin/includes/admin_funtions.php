@@ -22,7 +22,36 @@ function showCat()
     }
 
 }
+// function userOnline()
+// {
+//     global $conn;
+//     // luu  session cua? bat' ky` nguoi` dung` nao` dang nhap. vao he. thong'
+//     $session = session_id();
+//     $time = time();
+//     $set_time_out_inSecond = 20;
+//     $time_out = $time - $set_time_out_inSecond;
+//     $sql = "SELECT * FROM user_online WHERE session = '$session'";
+//     $statement = $conn->query($sql);
+//     $statement->execute();
+//     $data1 = $statement->fetchAll();
+//     if ($data1 == null) {
+//         $sqlinsert = "INSERT INTO user_online (session, time) values('$session' , ' $time') ";
+//         $statement2 = $conn->query($sqlinsert);
+//         $statement2->execute();
 
+//     } else {
+//         $sqlstm3 = "update user_online set time = '$time' where session = '$session'";
+//         $statement3 = $conn->query($sqlstm3);
+//         $statement3->execute();
+
+//     }
+
+//     $sql3 = "SELECT * FROM user_online WHERE time  >'$time_out'";
+//     $statement4 = $conn->query($sql3);
+//     $statement4->execute();
+//     $data2 = $statement4->fetchAll();
+//     echo $countdata2 = count($data2);
+// }
 function bulk_options()
 {
 
@@ -56,6 +85,33 @@ function bulk_options()
                     $statement->execute();
                     break;
 
+                case 'clone':
+
+                    $sql = " SELECT * FROM posts WHERE post_id = $checkBox ";
+                    $statement = $conn->prepare($sql);
+                    $statement->execute();
+                    $dataClone = $statement->fetchAll();
+
+                    foreach ($dataClone as $clone) {
+
+                        $post_category_id = $clone['post_category_id'];
+                        $title = $clone['post_title'];
+                        $post_author = $clone['post_author'];
+                        $post_date = $clone['post_time'];
+                        $post_content = $clone['post_content'];
+                        $post_tag = $clone['post_tag'];
+                        $post_status = $clone['post_status'];
+                        $post_img = $clone['post_img'];
+
+                    }
+
+                    $sql2 = " INSERT INTO posts (post_category_id,post_title,post_author,post_time,post_img,post_content,post_tag,post_status)
+  VALUES('$post_category_id','$title','$post_author','$post_date','
+  $post_img','$post_content','$post_tag','$post_status') ";
+                    $statement2 = $conn->prepare($sql2);
+                    $statement2->execute();
+                    break;
+
                 default:echo 'Bạn phải chọn gì đó';
                     break;
 
@@ -76,9 +132,6 @@ function addUsers()
         $user_lastname = $_POST['user_Lastname'];
         $user_Password = $_POST['user_password'];
         $user_role = $_POST['user_role'];
-        $cryptyy = '$2y$10$nguyenphuongthao111112';
-
-        $user_Password = crypt($user_Password, $cryptyy);
 
         global $errUser;
         $errUser = [];
@@ -103,6 +156,11 @@ function addUsers()
         }
 
         if (empty($errUser)) {
+
+            $arr = ['cost' => 12];
+
+// crypt password
+            $user_Password = password_hash($user_Password, PASSWORD_BCRYPT, $arr);
 
             $sql = "INSERT INTO users (user_name,user_password,user_firstname,user_lastname,user_email,user_role)";
             $sql .= " VALUES ('$userName','$user_Password','$user_firstname','$user_lastname','$userEmail','$user_role')   ";
@@ -631,10 +689,8 @@ function login()
         global $conn;
         $username = htmlspecialchars($username = $_POST['username']);
         $password = htmlspecialchars($password = $_POST['password']);
-        $cryptyy = '$2y$10$nguyenphuongthao111112';
-        $password = crypt($password, $cryptyy);
 
-        $sql = "SELECT * FROM  users WHERE user_name = '$username' and user_password = '$password'";
+        $sql = "SELECT * FROM  users WHERE user_name = '$username' ";
         $statement = $conn->prepare($sql);
         $statement->execute();
         $dataLogin = $statement->fetchAll();
@@ -651,14 +707,7 @@ function login()
 
         }
 
-        // khi người dùng đăng nhập tk mk  nếu đúng thì sẽ trả về một mạng sai thì sẽ là mảng rỗng
-
-        // empty($dataLogin) ? header('location: /index.php') : header('location: /admin//index.php');
-
-        if (empty($dataLogin)) {
-            header('location: /index.php');
-
-        } else {
+        if (password_verify($password, $user_password)) {
 
             $_SESSION['user_name'] = $user_name;
             $_SESSION['user_firstname'] = $user_firstname;
@@ -667,16 +716,11 @@ function login()
 
             header('location: /admin//index.php');
 
+        } else {
+
+            header('location: /index.php');
+
         }
-
-        // if (empty($dataLogin)) {
-
-        //     global $errLogin;
-        //     $errLogin['error'] = 'Ban phai nhap dung tk mat khau';
-
-        //     header('location: /index.php');
-
-        // }
 
     }
 

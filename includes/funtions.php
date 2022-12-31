@@ -45,19 +45,17 @@ function posts()
     $statementCount = $conn->prepare($sqlCount);
     $statementCount->execute();
     $dataCount = $statementCount->fetchAll();
+    $page = count($dataCount);
 
     // môi trang chỉ đc 5 bài sẽ phân sang trang khác
     $perPage = 5;
 
-    $page = count($dataCount);
-
     global $resultCountPage;
     // ceil sẽ làm tròn số thấp phân   làm tròn nên
 
-    $resultCountPage = ceil($page / 5);
+    $resultCountPage = ceil($page / $perPage);
 
     if (isset($_GET['page'])) {
-
         $pageGet = $_GET['page'];
 
     } else {
@@ -151,11 +149,10 @@ function registrations()
 
         if (empty($errregistrations)) {
 
+            $arr = ['cost' => 12];
+
             // crypt password
-            $cryptyy = '$2y$10$nguyenphuongthao111112';
-
-            $password = crypt($password, $cryptyy);
-
+            $password = password_hash($password, PASSWORD_BCRYPT, $arr);
             $sql = "INSERT INTO users (user_firstname, user_lastname , user_name, user_password , user_email ,user_role) VALUES ('$first_name','$last_name','$username','$password','$email','subscriber')  ";
             $statement = $conn->prepare($sql);
             $statement->execute();

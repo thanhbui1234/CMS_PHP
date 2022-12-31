@@ -18,6 +18,10 @@ registrations();
 
 
 
+
+
+
+
     <!-- Page Content -->
     <div class="container">
 
@@ -26,28 +30,30 @@ registrations();
                 <div class="row">
                     <div class="col-xs-6 col-xs-offset-3">
                         <div class="form-wrap">
+                            <a id="anh" href="post.php">a</a>
                             <h1>Register</h1>
-                            <form role="form" action="registration.php" method="post" id="login-form"
-                                autocomplete="off">
+                            <form role="form" action="registration.php" method="post" autocomplete="off">
+                                <div id="name">
+                                    <div class="form-group">
+                                        <label for="username" class="sr-only">First name</label>
+                                        <input type="text" name="first_name" id="username" class="form-control"
+                                            placeholder=" First name">
 
-                                <div class="form-group">
-                                    <label for="username" class="sr-only">First name</label>
-                                    <input type="text" name="first_name" id="username" class="form-control"
-                                        placeholder=" First name">
+                                        <h4 class="text-danger">
+                                            <?php echo isset($errregistrations['first_name']) ? $errregistrations['first_name'] : ''; ?>
+                                        </h4>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="sr-only">Last name</label>
+                                        <input type="text" name="last_name" id="username" class="form-control"
+                                            placeholder=" Last name">
 
-                                    <h4 class="text-danger">
-                                        <?php echo isset($errregistrations['first_name']) ? $errregistrations['first_name'] : ''; ?>
-                                    </h4>
+                                        <h4 class="text-danger">
+                                            <?php echo isset($errregistrations['last_name']) ? $errregistrations['last_name'] : ''; ?>
+                                        </h4>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="username" class="sr-only">Last name</label>
-                                    <input type="text" name="last_name" id="username" class="form-control"
-                                        placeholder=" Last name">
 
-                                    <h4 class="text-danger">
-                                        <?php echo isset($errregistrations['last_name']) ? $errregistrations['last_name'] : ''; ?>
-                                    </h4>
-                                </div>
 
 
                                 <div class="form-group">
@@ -90,7 +96,13 @@ registrations();
         <hr>
 
 
-
+        <script>
+        const anh = document.querySelector("#anh");
+        console.log(anh);
+        anh.addEventListener("click", () => {
+            anh.preventDefault();
+        });
+        </script>
 
         <!-- Footer -->
 

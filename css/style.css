@@ -1,0 +1,9 @@
+#name {
+  display: flex;
+  gap: 20px;
+}
+
+.active {
+  background-color: red;
+  color: red !important;
+}

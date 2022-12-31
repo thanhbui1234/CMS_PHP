@@ -6,6 +6,8 @@
 
     <div id="wrapper">
 
+
+
         <!-- Navigation -->
         <?php include './includes/admin_nav.php'?>
 
@@ -19,6 +21,10 @@
                         <h1 class="page-header">
                             Welcome to admin
                             <small><?php echo $_SESSION['user_name'] ?></small>
+                            <!-- <?php
+
+//userOnline()
+?> -->
 
                             <?php countDrafPosts()?>
                             <?php countPendingCmt()?>
